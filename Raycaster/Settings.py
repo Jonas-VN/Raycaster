@@ -1,7 +1,7 @@
 import math
 
 """Screen settings"""
-RESOLUTION = WIDTH, HEIGHT = 1400, 1000
+RESOLUTION = WIDTH, HEIGHT = 800, 600
 HALF_HEIGHT = HEIGHT // 2
 HALF_WIDTH = WIDTH // 2
 

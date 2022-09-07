@@ -4,10 +4,9 @@ from Raycaster.Settings import WIDTH, HEIGHT
 from Raycaster.Raycast import raycast
 
 class Ray:
-    def __init__(self, column, player, WIDTH):
+    def __init__(self, column = 0):
         self.column = column
-        self.player = player
-        self.direction = calculate_ray_direction(self.player.camera.distance_to_player, self.player.camera.direction, self.player.direction, column, WIDTH)
+        self.direction = None
         self.distance_to_wall = None
         self.map_coordinate = None
 
@@ -15,8 +14,8 @@ class Ray:
         # 1 -> vertical hit
         self.hit_direction = None
 
-    def cast_ray(self, map):
-        self.distance_to_wall, self.map_coordinate, self.hit_direction = raycast(self.player.coordinate, self.player.direction, self.direction, map)
+    def cast_ray(self, player_coordinate, player_direction, map):
+        self.distance_to_wall, self.map_coordinate, self.hit_direction = raycast(player_coordinate, player_direction, self.direction, map)
 
     def get_line(self, height):
         length = 1 / self.distance_to_wall * height
@@ -24,6 +23,8 @@ class Ray:
         bottom_point = (self.column, height / 2 - length / 2)
         return top_point, bottom_point
 
+    def calc_ray_direction(self, camera_distance, camera_direction, player_direction, width):
+        self.direction = calculate_ray_direction(camera_distance, camera_direction, player_direction, self.column, width)
 
 @njit()
 def calculate_ray_direction(distance_to_camera, camera_direction, player_direction, column, width):

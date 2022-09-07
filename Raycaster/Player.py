@@ -9,7 +9,7 @@ class Player:
         self.direction = np.array(PLAYER_START_DIRECTION)
         self.camera = Camera(self.direction)
         self.world_map = world_map
-        self.speed = 1
+        self.speed = 2.5
 
     def rotate(self, delta_x):
         alfa = -math.atan(delta_x / self.camera.distance_to_player)
