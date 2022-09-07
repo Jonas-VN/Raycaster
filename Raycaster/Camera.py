@@ -14,13 +14,3 @@ class Camera:
 
     def rotate(self, rotationmatrix):
         self.direction = np.dot(rotationmatrix, self.direction)
-
-
-if __name__ == '__main__':
-    camera = Camera([0,0])
-    print(camera.FOV)
-    print(camera.distance_to_player)
-    camera.FOV = 45
-    camera._fov_to_distance_to_player()
-    print(camera.FOV)
-    print(camera.distance_to_player)

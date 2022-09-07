@@ -1,4 +1,4 @@
-from Raycaster.Settings import PLAYER_START_POSITION, PLAYER_START_DIRECTION
+from Raycaster.Settings import PLAYER_START_POSITION, PLAYER_START_DIRECTION, PLAYER_SPEED
 from Raycaster.Camera import Camera
 import numpy as np
 import math
@@ -9,7 +9,7 @@ class Player:
         self.direction = np.array(PLAYER_START_DIRECTION)
         self.camera = Camera(self.direction)
         self.world_map = world_map
-        self.speed = 2.5
+        self.speed = PLAYER_SPEED
 
     def rotate(self, delta_x):
         alfa = -math.atan(delta_x / self.camera.distance_to_player)
