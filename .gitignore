@@ -130,3 +130,6 @@ dmypy.json
 
 # profiling
 .prof
+
+# visual studio code
+/.vscode
