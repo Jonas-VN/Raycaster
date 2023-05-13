@@ -132,4 +132,4 @@ dmypy.json
 .prof
 
 # visual studio code
-/.vscode
+.vscode
