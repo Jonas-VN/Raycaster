@@ -2,6 +2,7 @@ from Raycaster.Settings import FOV
 import numpy as np
 import math
 
+
 class Camera:
     def __init__(self, player_direction):
         self.direction = np.array([-player_direction[0], player_direction[1]])

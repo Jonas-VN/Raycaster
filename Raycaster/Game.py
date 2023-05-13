@@ -13,7 +13,8 @@ class Game:
         pygame.mouse.set_visible(False)
         self.clock = pygame.time.Clock()
         self.width, self.height = WIDTH, HEIGHT
-        self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode(
+            (self.width, self.height), pygame.RESIZABLE)
 
         self.world_map = WorldMap()
         self.player = Player(self.world_map)
@@ -23,13 +24,13 @@ class Game:
         self.running = True
         self.delta_time = 1e-9
 
-
-    def main_loop(self):    
+    def main_loop(self):
 
         while self.running:
             self.clock.tick()
             self.delta_time = self.clock.get_rawtime() / 1000
-            pygame.display.set_caption(f"Raycaster  FPS: {round(self.clock.get_fps(), 2)}")
+            pygame.display.set_caption(
+                f"Raycaster  FPS: {round(self.clock.get_fps(), 2)}")
             self.screen.fill((0, 0, 0))
 
             self.handle_keys()
@@ -38,17 +39,19 @@ class Game:
 
             pygame.display.update()
 
-
     # TODO: full wall segments, not 1 coordinate wall
+
     def render_walls(self):
         ray = None
         start_ray = None
 
-        for column in range(0, self.width + 1, self.render_step):
+        for column in range(0, self.width + self.render_step, self.render_step):
             prev_ray = ray
             ray = Ray(column)
-            ray.calc_ray_direction(self.player.camera.distance_to_player, self.player.camera.direction, self.player.direction, self.width)
-            ray.cast_ray(self.player.coordinate, self.player.direction, self.world_map.map)
+            ray.calc_ray_direction(self.player.camera.distance_to_player,
+                                   self.player.camera.direction, self.player.direction, self.width)
+            ray.cast_ray(self.player.coordinate,
+                         self.player.direction, self.world_map.map)
 
             # just for the start
             if start_ray is None:
@@ -56,8 +59,8 @@ class Game:
 
             # different coordinate
             elif start_ray.map_coordinate != ray.map_coordinate:
-                    self.render_wall_segment(start_ray, prev_ray)
-                    start_ray = prev_ray
+                self.render_wall_segment(start_ray, prev_ray)
+                start_ray = prev_ray
 
             # same coordinate but different side of cube
             elif start_ray.map_coordinate == ray.map_coordinate and start_ray.hit_direction != ray.hit_direction:
@@ -65,18 +68,21 @@ class Game:
                 start_ray = prev_ray
 
             # end of screen
-            elif column == self.width:
+            elif column >= self.width:
                 self.render_wall_segment(start_ray, prev_ray)
-
 
     def render_wall_segment(self, start_ray, end_ray):
         start_points = start_ray.get_line(self.height)
         end_points = end_ray.get_line(self.height)
         c = 255 - 100 * start_ray.hit_direction
-        pygame.draw.polygon(self.screen, (c, c, c), [start_points[0], start_points[1], end_points[1], end_points[0]])
-
+        pygame.draw.polygon(self.screen, (c, c, c), [
+                            start_points[0], start_points[1], end_points[1], end_points[0]])
 
     def handle_keys(self):
+        # Lock mouse in the middle of the screen
+        pygame.mouse.set_pos(self.width // 2, self.height // 2)
+        pygame.event.set_grab(True)
+
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.MOUSEMOTION:
@@ -85,8 +91,9 @@ class Game:
                 self.running = False
             elif event.type == pygame.VIDEORESIZE:
                 self.width, self.height = event.w, event.h
-                self.screen = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE)
-            
+                self.screen = pygame.display.set_mode(
+                    (self.width, self.height), pygame.RESIZABLE)
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] or keys[pygame.K_z]:
             self.player.move_up(self.delta_time)

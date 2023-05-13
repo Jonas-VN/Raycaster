@@ -3,6 +3,7 @@ from Raycaster.Camera import Camera
 import numpy as np
 import math
 
+
 class Player:
     def __init__(self, world_map):
         self.coordinate = np.array(PLAYER_START_POSITION)
@@ -14,11 +15,11 @@ class Player:
     def rotate(self, delta_x):
         alfa = -math.atan(delta_x / self.camera.distance_to_player)
         rotationmatrix = np.array(
-                [
-                    [math.cos(alfa), -math.sin(alfa)], 
-                    [math.sin(alfa),  math.cos(alfa)]
-                ]
-            )
+            [
+                [math.cos(alfa), -math.sin(alfa)],
+                [math.sin(alfa),  math.cos(alfa)]
+            ]
+        )
         self.direction = np.dot(rotationmatrix, self.direction)
         self.camera.rotate(rotationmatrix)
 
@@ -31,5 +32,3 @@ class Player:
         new_coordinate = self.coordinate + self.camera.direction * delta_time * self.speed
         if self.world_map.check_collision(new_coordinate):
             self.coordinate = new_coordinate
-
-        
