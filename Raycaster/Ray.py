@@ -1,7 +1,7 @@
 import numpy as np
 from numba import njit
-from Raycaster.Settings import WIDTH, HEIGHT
-from Raycaster.Raycast import raycast
+from raycaster.settings import WIDTH, HEIGHT
+from raycaster.raycast import raycast
 
 
 class Ray:
