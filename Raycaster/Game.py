@@ -1,4 +1,5 @@
 from raycaster.renderers.pygame_renderer import PygameRenderer
+from raycaster.renderers.pysdl2_renderer import PySDL2Renderer
 from raycaster.settings import RENDER_STEP
 from raycaster.world_map import WorldMap
 from raycaster.player import Player
@@ -7,7 +8,7 @@ from raycaster.ray import Ray
 
 class Game:
     def __init__(self):
-        self.renderer = PygameRenderer()
+        self.renderer = PySDL2Renderer()
         self.world_map = WorldMap()
         self.player = Player(self.world_map)
         self.render_step = RENDER_STEP
@@ -19,6 +20,7 @@ class Game:
             self.player.move(dx, dy, rel_mouse_motion)
             self.render_walls()
             self.renderer.update_screen()
+        self.renderer.destroy()
 
     def render_walls(self):
         ray = None

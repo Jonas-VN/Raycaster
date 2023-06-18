@@ -1,4 +1,5 @@
 from raycaster.settings import FOV
+
 import numpy as np
 import math
 

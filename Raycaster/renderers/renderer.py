@@ -4,11 +4,10 @@ from raycaster.settings import WIDTH, HEIGHT
 class Renderer:
     def __init__(self):
         self.width, self.height = WIDTH, HEIGHT
-        self.screen = None
         self.clock = None
         self.running = True
 
-    def render_line(self, x, y, x2, y2, color):
+    def render_line(self, pt1, pt2, color):
         pass
 
     def render_rectangle(self, x, y, dx, dy, color):
@@ -21,6 +20,9 @@ class Renderer:
         pass
 
     def clear_screen(self):
+        pass
+
+    def destroy(self):
         pass
 
     def handle_keys(self):

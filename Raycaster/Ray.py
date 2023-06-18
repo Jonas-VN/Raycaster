@@ -1,7 +1,7 @@
+from raycaster.raycast import raycast
+
 import numpy as np
 from numba import njit
-from raycaster.settings import WIDTH, HEIGHT
-from raycaster.raycast import raycast
 
 
 class Ray:
@@ -21,8 +21,8 @@ class Ray:
 
     def get_line(self, height):
         length = 1 / self.distance_to_wall * height
-        top_point = (self.column, height / 2 + length / 2)
-        bottom_point = (self.column, height / 2 - length / 2)
+        top_point = (self.column, int(height / 2 + length / 2))
+        bottom_point = (self.column, int(height / 2 - length / 2))
         return top_point, bottom_point
 
     def calc_ray_direction(self, camera_distance, camera_direction, player_direction, width):

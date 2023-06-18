@@ -1,5 +1,6 @@
 from raycaster.settings import PLAYER_START_POSITION, PLAYER_START_DIRECTION, PLAYER_SPEED
 from raycaster.camera import Camera
+
 import numpy as np
 import math
 

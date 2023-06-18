@@ -2,3 +2,5 @@ numpy
 numba
 pygame
 scipy
+PySDL2
+pysdl2-dll

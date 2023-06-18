@@ -1,4 +1,5 @@
 from raycaster.renderers.renderer import Renderer
+
 import pygame
 
 
@@ -11,8 +12,8 @@ class PygameRenderer(Renderer):
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.clock = pygame.time.Clock()
 
-    def render_line(self, x, y, x2, y2, color):
-        pygame.draw.line(self.screen, color, (x, y), (x2, y2))
+    def render_line(self, pt1, pt2, color):
+        pygame.draw.line(self.screen, color, pt1, pt2)
 
     def render_rectangle(self, x, y, dx, dy, color):
         pygame.draw.rect(self.screen, color, (x, y, dx, dy))
@@ -26,6 +27,9 @@ class PygameRenderer(Renderer):
 
     def clear_screen(self):
         self.screen.fill((0, 0, 0))
+
+    def destroy(self):
+        pygame.quit()
 
     def handle_keys(self):
         dx, dy, rel_mouse_motion = 0, 0, 0
