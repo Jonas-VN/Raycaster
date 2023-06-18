@@ -3,6 +3,7 @@ from raycaster.renderers.renderer import Renderer
 import sdl2
 import sdl2.ext
 import numpy as np
+from numba import njit
 
 
 class PySDL2Renderer(Renderer):
@@ -17,15 +18,16 @@ class PySDL2Renderer(Renderer):
         self.clock = sdl2.SDL_GetTicks()
 
     @staticmethod
-    def interpolate(start, end):
-        steps = np.abs(end[0] - start[0]) + 1
-        x = np.linspace(start[0], end[0], steps).astype(int)
-        y = np.linspace(start[1], end[1], steps).astype(int)
-        return np.vstack([x, y]).T
+    @njit()
+    def _parallellogram_to_rectangles(top_left, bottom_left, top_right, bottom_right):
+        def interpolate(start, end):
+            steps = np.abs(end[0] - start[0]) + 1
+            x = np.linspace(start[0], end[0], steps).astype(np.int64)
+            y = np.linspace(start[1], end[1], steps).astype(np.int64)
+            return [(x[i], y[i]) for i in range(steps)]
 
-    def parallellogram_to_rectangles(self, top_left, bottom_left, top_right, bottom_right):
-        top = self.interpolate(top_left, top_right)
-        bottom = self.interpolate(bottom_left, bottom_right)
+        top = interpolate(top_left, top_right)
+        bottom = interpolate(bottom_left, bottom_right)
 
         prev = top[0]
         rectangles = []
@@ -62,7 +64,7 @@ class PySDL2Renderer(Renderer):
         #     points.append(bottom[i][1])
         # sdl2.ext.line(self.window.get_surface(), color, points)
 
-        rectangles = self.parallellogram_to_rectangles(
+        rectangles = self._parallellogram_to_rectangles(
             top_left, bottom_left, top_right, bottom_right)
 
         # When rendering multiple rects this doesn't work even though it should according to the PySDL2 docs?
