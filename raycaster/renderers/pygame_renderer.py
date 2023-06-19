@@ -18,7 +18,7 @@ class PyGameRenderer(Renderer):
     def render_rectangle(self, x, y, dx, dy, color):
         pygame.draw.rect(self.screen, color, (x, y, dx, dy))
 
-    def render_parallellogram(self, top_left, bottom_left, top_right, bottom_right, color):
+    def render_parallelogram(self, top_left, bottom_left, top_right, bottom_right, color):
         pygame.draw.polygon(self.screen, color, [
                             bottom_left, top_left, top_right, bottom_right])
 

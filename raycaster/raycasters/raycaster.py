@@ -7,12 +7,11 @@ from enum import Enum, auto
 
 
 class Raycaster:
-    def __init__(self, renderer, world_map, player, rays=None):
+    def __init__(self, renderer, world_map, player):
         self.renderer = renderer
         self.world_map = world_map
         self.player = player
-        if rays is None:
-            self.rays = np.array([Ray(i) for i in range(WIDTH + 1)])
+        self.rays = np.array([Ray(i) for i in range(WIDTH + 1)])
 
     def render_walls(self):
         self.renderer.clear_screen()
@@ -102,3 +101,4 @@ class Raycaster:
 class Raycasters(Enum):
     RAYCASTER = auto()
     PER_WALL_SEGMENT_RAYCASTER = auto()
+    RENDER_STEP_RECTANGLE_RAYCASTER = auto()

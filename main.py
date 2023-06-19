@@ -8,7 +8,8 @@ def main():
     # renderer = Renderers.PYGAME
 
     # raycaster = Raycasters.RAYCASTER
-    raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
+    # raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
+    raycaster = Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER
 
     game = Game(renderer=renderer, raycaster=raycaster)
     game.run()

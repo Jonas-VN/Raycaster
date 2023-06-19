@@ -4,7 +4,7 @@ import math
 RESOLUTION = WIDTH, HEIGHT = 1600, 900
 HALF_HEIGHT = HEIGHT // 2
 HALF_WIDTH = WIDTH // 2
-RENDER_STEP = 3
+RENDER_STEP = 10
 
 
 """Player settings"""

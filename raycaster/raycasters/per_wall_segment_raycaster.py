@@ -33,5 +33,5 @@ class PerWallSegmentRaycaster(Raycaster):
         start_points = start_ray.get_line()
         end_points = end_ray.get_line()
         c = 255 - 100 * start_ray.hit_direction
-        self.renderer.render_parallellogram(
+        self.renderer.render_parallelogram(
             start_points[0], start_points[1], end_points[0], end_points[1], (c, c, c))

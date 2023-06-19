@@ -26,6 +26,10 @@ class Game:
             from raycaster.raycasters.per_wall_segment_raycaster import PerWallSegmentRaycaster
             self.raycaster = PerWallSegmentRaycaster(
                 self.renderer, self.world_map, self.player)
+        elif raycaster == Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER:
+            from raycaster.raycasters.render_step_rectangle_raycaster import RenderStepRectangleRaycaster
+            self.raycaster = RenderStepRectangleRaycaster(
+                self.renderer, self.world_map, self.player)
         else:
             raise ValueError("Invalid raycaster")
 
