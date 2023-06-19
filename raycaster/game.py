@@ -30,6 +30,10 @@ class Game:
             from raycaster.raycasters.render_step_rectangle_raycaster import RenderStepRectangleRaycaster
             self.raycaster = RenderStepRectangleRaycaster(
                 self.renderer, self.world_map, self.player)
+        elif raycaster == Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER:
+            from raycaster.raycasters.render_step_parallelogram_raycaster import RenderStepParallelogramRaycaster
+            self.raycaster = RenderStepParallelogramRaycaster(
+                self.renderer, self.world_map, self.player)
         else:
             raise ValueError("Invalid raycaster")
 
