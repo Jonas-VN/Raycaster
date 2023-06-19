@@ -3,7 +3,7 @@ from raycaster.renderers.renderer import Renderer
 import pygame
 
 
-class PygameRenderer(Renderer):
+class PyGameRenderer(Renderer):
     def __init__(self):
         super().__init__()
         pygame.init()
@@ -41,7 +41,7 @@ class PygameRenderer(Renderer):
         self.clock.tick()
         delta_time = self.clock.get_rawtime() / 1000
         pygame.display.set_caption(
-            f"Raycaster  FPS: {round(self.clock.get_fps(), 2)}")
+            f"Raycaster  FPS: {int(self.clock.get_fps())}")
 
         events = pygame.event.get()
         for event in events:

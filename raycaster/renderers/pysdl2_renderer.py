@@ -18,6 +18,13 @@ class PySDL2Renderer(Renderer):
         self.clock = sdl2.SDL_GetTicks()
 
     @staticmethod
+    def interpolate(start, end):
+        steps = np.abs(end[0] - start[0]) + 1
+        x = np.linspace(start[0], end[0], steps).astype(np.int64)
+        y = np.linspace(start[1], end[1], steps).astype(np.int64)
+        return [(x[i], y[i]) for i in range(steps)]
+
+    @staticmethod
     @njit()
     def _parallellogram_to_rectangles(top_left, bottom_left, top_right, bottom_right):
         def interpolate(start, end):
@@ -34,12 +41,12 @@ class PySDL2Renderer(Renderer):
         for i in range(len(top)):
             if top[i][1] != prev[1]:
                 rectangles.append(
-                    (prev[0], bottom[i][1], bottom[i][0] - prev[0], prev[1] - bottom[i][1]))
+                    (prev[0], top[i][1], bottom[i][0] - prev[0], bottom[i][1] - prev[1]))
                 prev = top[i]
 
         # Add the last rectangle
         rectangles.append(
-            (prev[0], bottom[-1][1], bottom[-1][0] - prev[0], prev[1] - bottom[-1][1]))
+            (prev[0], top[-1][1], bottom[-1][0] - prev[0], bottom[-1][1] - prev[1]))
 
         return rectangles
 
@@ -93,7 +100,7 @@ class PySDL2Renderer(Renderer):
         self.clock = current
 
         sdl2.SDL_SetWindowTitle(
-            self.window.window, f"Raycaster  FPS: {round(1 / delta_time, 2)}".encode("utf-8"))
+            self.window.window, f"Raycaster  FPS: {int(1 / delta_time)}".encode("utf-8"))
 
         events = sdl2.ext.get_events()
         for event in events:
