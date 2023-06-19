@@ -1,4 +1,5 @@
 from raycaster.settings import PLAYER_START_POSITION, PLAYER_START_DIRECTION, PLAYER_SPEED
+from raycaster.world_map import WorldMap
 from raycaster.camera import Camera
 
 import numpy as np
@@ -6,7 +7,7 @@ import math
 
 
 class Player:
-    def __init__(self, world_map):
+    def __init__(self, world_map: WorldMap):
         self.coordinate = np.array(PLAYER_START_POSITION)
         self.direction = np.array(PLAYER_START_DIRECTION)
         self.camera = Camera(self.direction)

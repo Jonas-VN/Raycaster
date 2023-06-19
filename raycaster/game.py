@@ -1,41 +1,22 @@
-from raycaster.raycasters.raycaster import Raycasters
-from raycaster.renderers.renderer import Renderers
+from raycaster.raycasters.raycaster_factory import RaycasterFactory
+from raycaster.raycasters.raycaster import Raycasters, Raycaster
+from raycaster.renderers.renderer_factory import RendererFactory
+from raycaster.renderers.renderer import Renderers, Renderer
 from raycaster.world_map import WorldMap
 from raycaster.player import Player
 
 
 class Game:
-    def __init__(self, renderer=Renderers.PYGAME, raycaster=Raycasters.RAYCASTER):
-        if renderer == Renderers.PYGAME:
-            from raycaster.renderers.pygame_renderer import PyGameRenderer
-            self.renderer = PyGameRenderer()
-        elif renderer == Renderers.PYSDL2:
-            from raycaster.renderers.pysdl2_renderer import PySDL2Renderer
-            self.renderer = PySDL2Renderer()
-        else:
-            raise ValueError("Invalid renderer")
+    def __init__(self, renderer: Renderer = Renderers.PYGAME, raycaster: Raycaster = Raycasters.RAYCASTER):
+        self.renderer_factory = RendererFactory(renderer)
+        self.renderer = self.renderer_factory.create_renderer()
 
         self.world_map = WorldMap()
         self.player = Player(self.world_map)
 
-        if raycaster == Raycasters.RAYCASTER:
-            from raycaster.raycasters.raycaster import Raycaster
-            self.raycaster = Raycaster(
-                self.renderer, self.world_map, self.player)
-        elif raycaster == Raycasters.PER_WALL_SEGMENT_RAYCASTER:
-            from raycaster.raycasters.per_wall_segment_raycaster import PerWallSegmentRaycaster
-            self.raycaster = PerWallSegmentRaycaster(
-                self.renderer, self.world_map, self.player)
-        elif raycaster == Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER:
-            from raycaster.raycasters.render_step_rectangle_raycaster import RenderStepRectangleRaycaster
-            self.raycaster = RenderStepRectangleRaycaster(
-                self.renderer, self.world_map, self.player)
-        elif raycaster == Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER:
-            from raycaster.raycasters.render_step_parallelogram_raycaster import RenderStepParallelogramRaycaster
-            self.raycaster = RenderStepParallelogramRaycaster(
-                self.renderer, self.world_map, self.player)
-        else:
-            raise ValueError("Invalid raycaster")
+        self.raycaster_factory = RaycasterFactory(raycaster)
+        self.raycaster = self.raycaster_factory.create_raycaster(
+            self.renderer, self.world_map, self.player)
 
     def main_loop(self):
         while self.renderer.running:
