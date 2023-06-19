@@ -18,7 +18,7 @@ class Renderer(ABC):
         pass
 
     @abstractmethod
-    def render_parallelogram(self, x, y, dx, dy, color):
+    def render_parallelogram(self, top_left, bottom_left, top_right, bottom_right, color):
         pass
 
     @abstractmethod
