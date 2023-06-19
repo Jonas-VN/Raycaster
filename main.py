@@ -12,7 +12,8 @@ def main():
     # raycaster = Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER
     # raycaster = Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER
     # raycaster = Raycasters.PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER
-    raycaster = Raycasters.PER_WALL_RAYCASTER
+    # raycaster = Raycasters.PER_WALL_RAYCASTER
+    raycaster = Raycasters.PER_WALL_RENDER_STEP_RAYCASTER
 
     debug = True
 
