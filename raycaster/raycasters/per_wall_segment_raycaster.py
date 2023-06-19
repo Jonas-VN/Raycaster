@@ -12,10 +12,6 @@ class PerWallSegmentRaycaster(Raycaster):
         start_ray = self.rays[0]
         prev_ray = self.rays[0]
         for ray in self.rays:
-            # just for the start
-            # if start_ray is None:
-            #     start_ray = ray
-
             # different coordinate
             if start_ray.map_coordinate != ray.map_coordinate:
                 self._render_wall_segment(start_ray, prev_ray)
