@@ -1,7 +1,6 @@
 from raycaster.settings import WIDTH, HEIGHT
 
 from abc import ABC, abstractmethod
-from enum import Enum, auto
 
 
 class Renderer(ABC):
@@ -37,8 +36,3 @@ class Renderer(ABC):
     @abstractmethod
     def handle_keys(self):
         pass
-
-
-class Renderers(Enum):
-    PYGAME = auto()
-    PYSDL2 = auto()
