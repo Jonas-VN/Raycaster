@@ -6,16 +6,29 @@ import numpy as np
 
 
 class RenderStepRectangleRaycaster(Raycaster):
-    def __init__(self, renderer, world_map, player):
-        super().__init__(renderer, world_map, player)
+    def __init__(self, renderer, world_map, player, debug):
+        super().__init__(renderer, world_map, player, debug)
         self.rays = np.array([Ray(i)
                               for i in range(0, WIDTH + RENDER_STEP, RENDER_STEP)])
 
     def render_walls(self):
         self.renderer.clear_screen()
         for ray in self.rays:
-            points = ray.get_line()
-            c = 255 - 100 * ray.hit_direction
-            self.renderer.render_rectangle(
-                points[0][0], points[0][1], RENDER_STEP, points[1][1] - points[0][1], (c, c, c))
+            self._render_wall_segment(ray)
         self.renderer.update_screen()
+
+    def _render_wall_segment(self, ray):
+        points = ray.get_line()
+        c = 255 - 100 * ray.hit_direction
+        self.renderer.render_rectangle(
+            points[0][0], points[0][1], RENDER_STEP, points[1][1] - points[0][1], (c, c, c))
+
+        if self.debug:
+            self.renderer.render_line(
+                points[0], points[1], self.debug_color)
+            self.renderer.render_line(
+                points[0], (points[0][0] + RENDER_STEP, points[0][1]), self.debug_color)
+            self.renderer.render_line(
+                points[1], (points[1][0] + RENDER_STEP, points[1][1]), self.debug_color)
+            self.renderer.render_line(
+                (points[0][0] + RENDER_STEP, points[0][1]), (points[1][0] + RENDER_STEP, points[1][1]), self.debug_color)

@@ -3,8 +3,8 @@ from raycaster.settings import WIDTH
 
 
 class PerWallRaycaster(Raycaster):
-    def __init__(self, renderer, world_map, player):
-        super().__init__(renderer, world_map, player)
+    def __init__(self, renderer, world_map, player, debug):
+        super().__init__(renderer, world_map, player, debug)
 
     def render_walls(self):
         self.renderer.clear_screen()
@@ -36,3 +36,13 @@ class PerWallRaycaster(Raycaster):
         c = 255 - 100 * start_ray.hit_direction
         self.renderer.render_parallelogram(
             start_points[0], start_points[1], end_points[0], end_points[1], (c, c, c))
+
+        if self.debug:
+            self.renderer.render_line(
+                start_points[0], start_points[1], self.debug_color)
+            self.renderer.render_line(
+                end_points[0], end_points[1], self.debug_color)
+            self.renderer.render_line(
+                start_points[0], end_points[0], self.debug_color)
+            self.renderer.render_line(
+                start_points[1], end_points[1], self.debug_color)

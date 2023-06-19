@@ -24,9 +24,9 @@ class RaycasterFactory:
     def __init__(self, raycaster_type: Raycaster = Raycasters.RAYCASTER):
         self.raycaster_type = raycaster_type
 
-    def create_raycaster(self, renderer: Renderer, world_map: WorldMap, player: Player) -> Raycaster:
+    def create_raycaster(self, renderer: Renderer, world_map: WorldMap, player: Player, debug: bool) -> Raycaster:
         if self.raycaster_type not in Raycasters:
             raise ValueError(
                 f"Raycaster type {self.raycaster_type} is not supported.")
         raycaster_class = Raycasters(self.raycaster_type).value
-        return raycaster_class(renderer, world_map, player)
+        return raycaster_class(renderer, world_map, player, debug)

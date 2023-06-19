@@ -7,7 +7,7 @@ from raycaster.player import Player
 
 
 class Game:
-    def __init__(self, renderer: Renderer = Renderers.PYGAME, raycaster: Raycaster = Raycasters.RAYCASTER):
+    def __init__(self, renderer: Renderer = Renderers.PYGAME, raycaster: Raycaster = Raycasters.RAYCASTER, debug: bool = False):
         self.renderer_factory = RendererFactory(renderer)
         self.renderer = self.renderer_factory.create_renderer()
 
@@ -16,7 +16,7 @@ class Game:
 
         self.raycaster_factory = RaycasterFactory(raycaster)
         self.raycaster = self.raycaster_factory.create_raycaster(
-            self.renderer, self.world_map, self.player)
+            self.renderer, self.world_map, self.player, debug)
 
     def main_loop(self):
         while self.renderer.running:

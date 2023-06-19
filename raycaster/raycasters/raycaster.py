@@ -3,14 +3,16 @@ from raycaster.ray import Ray
 
 import numpy as np
 from numba import njit
-from enum import Enum, auto
 
 
 class Raycaster:
-    def __init__(self, renderer, world_map, player):
+    def __init__(self, renderer, world_map, player, debug=False):
         self.renderer = renderer
         self.world_map = world_map
         self.player = player
+        # Nothing to debug here really, it just renders everything without debugging
+        self.debug = debug
+        self.debug_color = (255, 0, 0)
         self.rays = np.array([Ray(i) for i in range(WIDTH + 1)])
 
     def render_walls(self):

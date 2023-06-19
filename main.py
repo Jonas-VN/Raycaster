@@ -14,7 +14,9 @@ def main():
     # raycaster = Raycasters.PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER
     raycaster = Raycasters.PER_WALL_RAYCASTER
 
-    game = Game(renderer=renderer, raycaster=raycaster)
+    debug = True
+
+    game = Game(renderer=renderer, raycaster=raycaster, debug=debug)
     game.run()
 
 
