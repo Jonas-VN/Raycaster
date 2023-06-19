@@ -1,5 +1,5 @@
-from raycaster.raycasters.raycaster_factory import RaycasterFactory
-from raycaster.raycasters.raycaster import Raycasters, Raycaster
+from raycaster.raycasters.raycaster_factory import RaycasterFactory, Raycasters
+from raycaster.raycasters.raycaster import Raycaster
 from raycaster.renderers.renderer_factory import RendererFactory
 from raycaster.renderers.renderer import Renderers, Renderer
 from raycaster.world_map import WorldMap

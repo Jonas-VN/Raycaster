@@ -1,16 +1,17 @@
 from raycaster.game import Game
 from raycaster.renderers.renderer import Renderers
-from raycaster.raycasters.raycaster import Raycasters
+from raycaster.raycasters.raycaster_factory import Raycasters
 
 
 def main():
-    # renderer = Renderers.PYSDL2
-    renderer = Renderers.PYGAME
+    renderer = Renderers.PYSDL2
+    # renderer = Renderers.PYGAME
 
     # raycaster = Raycasters.RAYCASTER
     # raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
     # raycaster = Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER
-    raycaster = Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER
+    # raycaster = Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER
+    raycaster = Raycasters.PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER
 
     game = Game(renderer=renderer, raycaster=raycaster)
     game.run()

@@ -96,10 +96,3 @@ class Raycaster:
                 x += 1
 
         return distance_to_wall, coordinate, hit_direction
-
-
-class Raycasters(Enum):
-    RAYCASTER = auto()
-    PER_WALL_SEGMENT_RAYCASTER = auto()
-    RENDER_STEP_RECTANGLE_RAYCASTER = auto()
-    RENDER_STEP_PARALLELOGRAM_RAYCASTER = auto()
