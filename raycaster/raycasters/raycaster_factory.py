@@ -1,4 +1,5 @@
 from raycaster.raycasters.raycaster import Raycaster
+from raycaster.raycasters.per_wall_raycaster import PerWallRaycaster
 from raycaster.raycasters.per_wall_segment_raycaster import PerWallSegmentRaycaster
 from raycaster.raycasters.render_step_rectangle_raycaster import RenderStepRectangleRaycaster
 from raycaster.raycasters.render_step_parallelogram_raycaster import RenderStepParallelogramRaycaster
@@ -12,6 +13,7 @@ from enum import Enum
 
 class Raycasters(Enum):
     RAYCASTER = Raycaster
+    PER_WALL_RAYCASTER = PerWallRaycaster
     PER_WALL_SEGMENT_RAYCASTER = PerWallSegmentRaycaster
     RENDER_STEP_RECTANGLE_RAYCASTER = RenderStepRectangleRaycaster
     RENDER_STEP_PARALLELOGRAM_RAYCASTER = RenderStepParallelogramRaycaster

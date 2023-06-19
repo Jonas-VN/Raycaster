@@ -11,7 +11,8 @@ def main():
     # raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
     # raycaster = Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER
     # raycaster = Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER
-    raycaster = Raycasters.PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER
+    # raycaster = Raycasters.PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER
+    raycaster = Raycasters.PER_WALL_RAYCASTER
 
     game = Game(renderer=renderer, raycaster=raycaster)
     game.run()
