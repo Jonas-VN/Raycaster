@@ -7,6 +7,7 @@ class PerWallRaycaster(Raycaster):
         super().__init__(renderer, world_map, player, debug)
 
     def render_walls(self):
+        # TODO: not working fully yet...
         self.renderer.clear_screen()
 
         start_ray = self.rays[0]
@@ -39,11 +40,5 @@ class PerWallRaycaster(Raycaster):
 
         if self.debug:
             # TODO: fix crash "int() argument must be a string, a bytes-like object or a real number, not 'NoneType'" when debug is True with PySDL2
-            self.renderer.render_line(
-                start_points[0], start_points[1], self.debug_color)
-            self.renderer.render_line(
-                end_points[0], end_points[1], self.debug_color)
-            self.renderer.render_line(
-                start_points[0], end_points[0], self.debug_color)
-            self.renderer.render_line(
-                start_points[1], end_points[1], self.debug_color)
+            self.draw_outlines(
+                start_points[0], start_points[1], end_points[0], end_points[1])

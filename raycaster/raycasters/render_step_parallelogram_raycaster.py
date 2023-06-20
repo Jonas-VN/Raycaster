@@ -28,11 +28,5 @@ class RenderStepParallelogramRaycaster(Raycaster):
             start_points[0], start_points[1], end_points[0], end_points[1], (c, c, c))
 
         if self.debug:
-            self.renderer.render_line(
-                start_points[0], start_points[1], self.debug_color)
-            self.renderer.render_line(
-                end_points[0], end_points[1], self.debug_color)
-            self.renderer.render_line(
-                start_points[0], end_points[0], self.debug_color)
-            self.renderer.render_line(
-                start_points[1], end_points[1], self.debug_color)
+            self.draw_outlines(
+                start_points[0], start_points[1], end_points[0], end_points[1])

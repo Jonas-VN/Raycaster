@@ -10,7 +10,6 @@ class Raycaster:
         self.renderer = renderer
         self.world_map = world_map
         self.player = player
-        # Nothing to debug here really, it just renders everything without debugging
         self.debug = debug
         self.debug_color = (255, 0, 0)
         self.rays = np.array([Ray(i) for i in range(WIDTH + 1)])
@@ -21,6 +20,8 @@ class Raycaster:
             points = ray.get_line()
             c = 255 - 100 * ray.hit_direction
             self.renderer.render_line(points[0], points[1], (c, c, c))
+            if self.debug:
+                self.draw_outlines(points[0], points[1], points[0], points[1])
         self.renderer.update_screen()
 
     def calculate_rays(self):
@@ -98,3 +99,9 @@ class Raycaster:
                 x += 1
 
         return distance_to_wall, coordinate, hit_direction
+
+    def draw_outlines(self, top_left, bottom_left, top_right, bottom_right):
+        self.renderer.render_line(top_left, bottom_left, self.debug_color)
+        self.renderer.render_line(top_right, bottom_right, self.debug_color)
+        self.renderer.render_line(top_left, top_right, self.debug_color)
+        self.renderer.render_line(bottom_left, bottom_right, self.debug_color)

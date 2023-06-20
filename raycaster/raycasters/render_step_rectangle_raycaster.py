@@ -24,11 +24,5 @@ class RenderStepRectangleRaycaster(Raycaster):
             points[0][0], points[0][1], RENDER_STEP, points[1][1] - points[0][1], (c, c, c))
 
         if self.debug:
-            self.renderer.render_line(
-                points[0], points[1], self.debug_color)
-            self.renderer.render_line(
-                points[0], (points[0][0] + RENDER_STEP, points[0][1]), self.debug_color)
-            self.renderer.render_line(
-                points[1], (points[1][0] + RENDER_STEP, points[1][1]), self.debug_color)
-            self.renderer.render_line(
-                (points[0][0] + RENDER_STEP, points[0][1]), (points[1][0] + RENDER_STEP, points[1][1]), self.debug_color)
+            self.draw_outlines(
+                points[0], points[1], (points[0][0] + RENDER_STEP, points[0][1]), (points[1][0] + RENDER_STEP, points[1][1]))
