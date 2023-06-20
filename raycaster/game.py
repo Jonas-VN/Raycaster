@@ -3,6 +3,7 @@ from raycaster.raycasters.raycaster import Raycaster
 from raycaster.renderers.renderer_factory import RendererFactory, Renderers
 from raycaster.renderers.renderer import Renderer
 from raycaster.world_map import WorldMap
+from raycaster.keyboard import Keyboard
 from raycaster.player import Player
 
 
@@ -19,10 +20,9 @@ class Game:
             self.renderer, self.world_map, self.player, debug)
 
     def main_loop(self):
-        while self.renderer.running:
+        keyboard = Keyboard()
+        while self.renderer.running and not keyboard.ESCAPE:
             keyboard, delta_time = self.renderer.handle_keys()
-            if keyboard.ESCAPE:
-                break
             self.player.move(keyboard, delta_time)
             self.raycaster.calculate_rays()
             self.raycaster.render_walls()
