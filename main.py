@@ -4,8 +4,8 @@ from raycaster.raycasters.raycaster_factory import Raycasters
 
 
 def main():
-    renderer = Renderers.PYSDL2
-    # renderer = Renderers.PYGAME
+    # renderer = Renderers.PYSDL2
+    renderer = Renderers.PYGAME
 
     # raycaster = Raycasters.RAYCASTER
     # raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
