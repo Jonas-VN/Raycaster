@@ -38,12 +38,12 @@ class Player:
     def move(self, keyboard: Keyboard, delta_time):
         if keyboard.W:
             self._move_y(delta_time)
-        elif keyboard.S:
+        if keyboard.S:
             self._move_y(-delta_time)
 
         if keyboard.D:
             self._move_x(delta_time)
-        elif keyboard.A:
+        if keyboard.A:
             self._move_x(-delta_time)
 
         if keyboard.MOUSE_MOTION:
