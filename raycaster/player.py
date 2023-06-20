@@ -36,19 +36,15 @@ class Player:
             self.coordinate = new_coordinate
 
     def move(self, keyboard: Keyboard, delta_time):
-        dx, dy = 0, 0
-        rel_mouse_motion = keyboard.MOUSE_MOTION * delta_time
-
         if keyboard.W:
-            dy = delta_time
+            self._move_y(delta_time)
         elif keyboard.S:
-            dy = -delta_time
+            self._move_y(-delta_time)
 
         if keyboard.D:
-            dx = delta_time
+            self._move_x(delta_time)
         elif keyboard.A:
-            dx = -delta_time
+            self._move_x(-delta_time)
 
-        self._move_x(dx)
-        self._move_y(dy)
-        self._rotate(rel_mouse_motion)
+        if keyboard.MOUSE_MOTION:
+            self._rotate(keyboard.MOUSE_MOTION * delta_time)

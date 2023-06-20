@@ -53,13 +53,13 @@ class PyGameRenderer(Renderer):
 
         keys = pygame.key.get_pressed()
         # I'm using AZERTY so I have to use Z instead of W
-        keyboard.W = keys[pygame.K_z] or keys[pygame.K_w]
+        keyboard.W = keys[pygame.K_z] or keys[pygame.K_w] == 1
         # I'm using AZERTY so I have to use Q instead of A
-        keyboard.A = keys[pygame.K_q] or keys[pygame.K_a]
-        keyboard.S = keys[pygame.K_s]
-        keyboard.D = keys[pygame.K_d]
-        keyboard.ESCAPE = keys[pygame.K_ESCAPE]
-        keyboard.UP = keys[pygame.K_UP]
-        keyboard.DOWN = keys[pygame.K_DOWN]
+        keyboard.A = keys[pygame.K_q] or keys[pygame.K_a] == 1
+        keyboard.S = keys[pygame.K_s] == 1
+        keyboard.D = keys[pygame.K_d] == 1
+        keyboard.ESCAPE = keys[pygame.K_ESCAPE] == 1
+        keyboard.UP = keys[pygame.K_UP] == 1
+        keyboard.DOWN = keys[pygame.K_DOWN] == 1
 
         return keyboard, delta_time
