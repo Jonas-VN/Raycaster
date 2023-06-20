@@ -53,20 +53,13 @@ class PyGameRenderer(Renderer):
 
         keys = pygame.key.get_pressed()
         # I'm using AZERTY so I have to use Z instead of W
-        if keys[pygame.K_z] or keys[pygame.K_w]:
-            keyboard.W = True
-        if keys[pygame.K_s]:
-            keyboard.S = True
-        if keys[pygame.K_d]:
-            keyboard.D = True
+        keyboard.W = keys[pygame.K_z] or keys[pygame.K_w]
         # I'm using AZERTY so I have to use Q instead of A
-        if keys[pygame.K_q] or keys[pygame.K_a]:
-            keyboard.A = True
-        if keys[pygame.K_ESCAPE]:
-            keyboard.ESCAPE = True
-        if keys[pygame.K_UP]:
-            keyboard.UP = True
-        if keys[pygame.K_DOWN]:
-            keyboard.DOWN = True
+        keyboard.A = keys[pygame.K_q] or keys[pygame.K_a]
+        keyboard.S = keys[pygame.K_s]
+        keyboard.D = keys[pygame.K_d]
+        keyboard.ESCAPE = keys[pygame.K_ESCAPE]
+        keyboard.UP = keys[pygame.K_UP]
+        keyboard.DOWN = keys[pygame.K_DOWN]
 
         return keyboard, delta_time

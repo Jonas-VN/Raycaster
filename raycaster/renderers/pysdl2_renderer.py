@@ -111,19 +111,14 @@ class PySDL2Renderer(Renderer):
                 self.running = False
 
         keys = sdl2.SDL_GetKeyboardState(None)
-        if keys[sdl2.SDL_SCANCODE_Z] or keys[sdl2.SDL_SCANCODE_W]:
-            keyboard.W = True
-        if keys[sdl2.SDL_SCANCODE_S]:
-            keyboard.S = True
-        if keys[sdl2.SDL_SCANCODE_D]:
-            keyboard.D = True
-        if keys[sdl2.SDL_SCANCODE_Q] or keys[sdl2.SDL_SCANCODE_A]:
-            keyboard.A = True
-        if keys[sdl2.SDL_SCANCODE_ESCAPE]:
-            keyboard.ESCAPE = True
-        if keys[sdl2.SDL_SCANCODE_UP]:
-            keyboard.UP = True
-        if keys[sdl2.SDL_SCANCODE_DOWN]:
-            keyboard.DOWN = True
+        # I'm using AZERTY so I have to use Z instead of W
+        keyboard.W = keys[sdl2.SDL_SCANCODE_Z] or keys[sdl2.SDL_SCANCODE_W]
+        # I'm using AZERTY so I have to use Q instead of A
+        keyboard.A = keys[sdl2.SDL_SCANCODE_Q] or keys[sdl2.SDL_SCANCODE_A]
+        keyboard.S = keys[sdl2.SDL_SCANCODE_S]
+        keyboard.D = keys[sdl2.SDL_SCANCODE_D]
+        keyboard.ESCAPE = keys[sdl2.SDL_SCANCODE_ESCAPE]
+        keyboard.UP = keys[sdl2.SDL_SCANCODE_UP]
+        keyboard.DOWN = keys[sdl2.SDL_SCANCODE_DOWN]
 
         return keyboard, delta_time
