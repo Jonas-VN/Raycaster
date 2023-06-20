@@ -35,7 +35,7 @@ class Raycaster:
             self.player.coordinate, self.player.direction, ray.direction, self.world_map.map)
 
     @staticmethod
-    @njit
+    @njit(fastmath=True)
     def _raycast(player_coordinate, player_direction, ray_direction, map):
         x = 0
         y = 0

@@ -25,7 +25,7 @@ class PySDL2Renderer(Renderer):
         return [(x[i], y[i]) for i in range(steps)]
 
     @staticmethod
-    @njit()
+    @njit(fastmath=True)
     def _parallelogram_to_rectangles(top_left, bottom_left, top_right, bottom_right):
         def interpolate(start, end):
             steps = np.abs(end[0] - start[0]) + 1

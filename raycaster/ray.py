@@ -17,18 +17,23 @@ class Ray:
             distance_to_camera, camera_direction, player_direction, self.column)
 
     @staticmethod
-    @njit
+    @njit(fastmath=True)
     def _calculate_ray_direction(distance_to_camera, camera_direction, player_direction, column):
-        direction_to_column = distance_to_camera * player_direction + \
-            (-1 + (2 * column / WIDTH)) * camera_direction
-        direction = direction_to_column / np.linalg.norm(direction_to_column)
+        factor = -1.0 + 2.0 * column / WIDTH
+        direction_to_column = distance_to_camera * \
+            player_direction + factor * camera_direction
+        direction_norm = np.sqrt(
+            direction_to_column[0] * direction_to_column[0] +
+            direction_to_column[1] * direction_to_column[1]
+        )
+        direction = direction_to_column / direction_norm
         return direction
 
     def get_line(self):
         return self._get_line(self.hit_distance, self.column)
 
     @staticmethod
-    @njit
+    @njit(fastmath=True)
     def _get_line(hit_distance, column):
         half_length = 1 / hit_distance * HALF_HEIGHT
         top_point = (column, HALF_HEIGHT - half_length)
