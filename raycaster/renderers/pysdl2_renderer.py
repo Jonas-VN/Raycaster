@@ -1,4 +1,5 @@
 from raycaster.renderers.renderer import Renderer
+from raycaster.keyboard import Keyboard
 
 import sdl2
 import sdl2.ext
@@ -91,7 +92,7 @@ class PySDL2Renderer(Renderer):
         sdl2.ext.quit()
 
     def handle_keys(self):
-        dx, dy, rel_mouse_motion = 0, 0, 0
+        keyboard = Keyboard()
 
         current = sdl2.SDL_GetTicks()
         delta_time = (current - self.clock) / 1000
@@ -105,20 +106,24 @@ class PySDL2Renderer(Renderer):
         events = sdl2.ext.get_events()
         for event in events:
             if event.type == sdl2.SDL_MOUSEMOTION:
-                rel_mouse_motion = event.motion.xrel * delta_time
+                keyboard.MOUSE_MOTION = event.motion.xrel
             elif event.type == sdl2.SDL_QUIT:
                 self.running = False
 
         keys = sdl2.SDL_GetKeyboardState(None)
-        if keys[sdl2.SDL_SCANCODE_W] or keys[sdl2.SDL_SCANCODE_UP]:
-            dy = delta_time
-        if keys[sdl2.SDL_SCANCODE_S] or keys[sdl2.SDL_SCANCODE_DOWN]:
-            dy = -delta_time
-        if keys[sdl2.SDL_SCANCODE_D] or keys[sdl2.SDL_SCANCODE_RIGHT]:
-            dx = delta_time
-        if keys[sdl2.SDL_SCANCODE_A] or keys[sdl2.SDL_SCANCODE_LEFT]:
-            dx = -delta_time
+        if keys[sdl2.SDL_SCANCODE_Z] or keys[sdl2.SDL_SCANCODE_W]:
+            keyboard.W = True
+        if keys[sdl2.SDL_SCANCODE_S]:
+            keyboard.S = True
+        if keys[sdl2.SDL_SCANCODE_D]:
+            keyboard.D = True
+        if keys[sdl2.SDL_SCANCODE_Q] or keys[sdl2.SDL_SCANCODE_A]:
+            keyboard.A = True
         if keys[sdl2.SDL_SCANCODE_ESCAPE]:
-            self.running = False
+            keyboard.ESCAPE = True
+        if keys[sdl2.SDL_SCANCODE_UP]:
+            keyboard.UP = True
+        if keys[sdl2.SDL_SCANCODE_DOWN]:
+            keyboard.DOWN = True
 
-        return dx, dy, rel_mouse_motion
+        return keyboard, delta_time

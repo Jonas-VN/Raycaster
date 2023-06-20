@@ -20,8 +20,10 @@ class Game:
 
     def main_loop(self):
         while self.renderer.running:
-            dx, dy, rel_mouse_motion = self.renderer.handle_keys()
-            self.player.move(dx, dy, rel_mouse_motion)
+            keyboard, delta_time = self.renderer.handle_keys()
+            if keyboard.ESCAPE:
+                break
+            self.player.move(keyboard, delta_time)
             self.raycaster.calculate_rays()
             self.raycaster.render_walls()
         self.renderer.destroy()

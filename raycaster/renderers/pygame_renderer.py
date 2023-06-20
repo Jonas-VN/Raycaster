@@ -1,4 +1,5 @@
 from raycaster.renderers.renderer import Renderer
+from raycaster.keyboard import Keyboard
 
 import pygame
 
@@ -32,7 +33,7 @@ class PyGameRenderer(Renderer):
         pygame.quit()
 
     def handle_keys(self):
-        dx, dy, rel_mouse_motion = 0, 0, 0
+        keyboard = Keyboard()
 
         # Lock mouse in the middle of the screen
         pygame.mouse.set_pos(self.width // 2, self.height // 2)
@@ -46,20 +47,26 @@ class PyGameRenderer(Renderer):
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.MOUSEMOTION:
-                rel_mouse_motion = event.rel[0] * delta_time
+                keyboard.MOUSE_MOTION = event.rel[0]
             elif event.type == pygame.QUIT:
                 self.running = False
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_z] or keys[pygame.K_UP]:
-            dy = delta_time
-        if keys[pygame.K_s] or keys[pygame.K_DOWN]:
-            dy = -delta_time
-        if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-            dx = delta_time
-        if keys[pygame.K_q] or keys[pygame.K_LEFT]:
-            dx = -delta_time
+        # I'm using AZERTY so I have to use Z instead of W
+        if keys[pygame.K_z] or keys[pygame.K_w]:
+            keyboard.W = True
+        if keys[pygame.K_s]:
+            keyboard.S = True
+        if keys[pygame.K_d]:
+            keyboard.D = True
+        # I'm using AZERTY so I have to use Q instead of A
+        if keys[pygame.K_q] or keys[pygame.K_a]:
+            keyboard.A = True
         if keys[pygame.K_ESCAPE]:
-            self.running = False
+            keyboard.ESCAPE = True
+        if keys[pygame.K_UP]:
+            keyboard.UP = True
+        if keys[pygame.K_DOWN]:
+            keyboard.DOWN = True
 
-        return dx, dy, rel_mouse_motion
+        return keyboard, delta_time
