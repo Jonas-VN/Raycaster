@@ -19,7 +19,7 @@ class Game:
         self.raycaster = self.raycaster_factory.create_raycaster(
             self.renderer, self.world_map, self.player, debug)
 
-    def main_loop(self):
+    def __main_loop(self):
         keyboard = Keyboard()
         while self.renderer.running and not keyboard.ESCAPE:
             keyboard, delta_time = self.renderer.handle_keys()
@@ -29,4 +29,4 @@ class Game:
         self.renderer.destroy()
 
     def run(self):
-        self.main_loop()
+        self.__main_loop()

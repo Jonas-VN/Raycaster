@@ -14,10 +14,10 @@ class RenderStepRectangleRaycaster(Raycaster):
     def render_walls(self):
         self.renderer.clear_screen()
         for ray in self.rays:
-            self._render_wall_segment(ray)
+            self.__render_wall_segment(ray)
         self.renderer.update_screen()
 
-    def _render_wall_segment(self, ray):
+    def __render_wall_segment(self, ray):
         points = ray.get_line()
         c = 255 - 100 * ray.hit_direction
         self.renderer.render_rectangle(

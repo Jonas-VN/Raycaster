@@ -31,12 +31,12 @@ class Raycaster:
             self.raycast(ray)
 
     def raycast(self, ray):
-        ray.hit_distance, ray.map_coordinate, ray.hit_direction = self._raycast(
+        ray.hit_distance, ray.map_coordinate, ray.hit_direction = self.__raycast(
             self.player.coordinate, self.player.direction, ray.direction, self.world_map.map)
 
     @staticmethod
     @njit(fastmath=True)
-    def _raycast(player_coordinate, player_direction, ray_direction, map):
+    def __raycast(player_coordinate, player_direction, ray_direction, map):
         x = 0
         y = 0
         delta_v = abs(1 / ray_direction[0])

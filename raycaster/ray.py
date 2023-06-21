@@ -13,12 +13,12 @@ class Ray:
         self.hit_distance = None
 
     def calculate_ray_direction(self, distance_to_camera, camera_direction, player_direction):
-        self.direction = self._calculate_ray_direction(
+        self.direction = self.__calculate_ray_direction(
             distance_to_camera, camera_direction, player_direction, self.column)
 
     @staticmethod
     @njit(fastmath=True)
-    def _calculate_ray_direction(distance_to_camera, camera_direction, player_direction, column):
+    def __calculate_ray_direction(distance_to_camera, camera_direction, player_direction, column):
         factor = -1.0 + 2.0 * column / WIDTH
         direction_to_column = distance_to_camera * \
             player_direction + factor * camera_direction
@@ -30,11 +30,11 @@ class Ray:
         return direction
 
     def get_line(self):
-        return self._get_line(self.hit_distance, self.column)
+        return self.__get_line(self.hit_distance, self.column)
 
     @staticmethod
     @njit(fastmath=True)
-    def _get_line(hit_distance, column):
+    def __get_line(hit_distance, column):
         half_length = 1 / hit_distance * HALF_HEIGHT
         top_point = (column, HALF_HEIGHT - half_length)
         bottom_point = (column, HALF_HEIGHT + half_length)

@@ -14,22 +14,22 @@ class PerWallSegmentRaycaster(Raycaster):
         for ray in self.rays:
             # different coordinate
             if start_ray.map_coordinate != ray.map_coordinate:
-                self._render_wall_segment(start_ray, prev_ray)
+                self.__render_wall_segment(start_ray, prev_ray)
                 start_ray = prev_ray
 
             # same coordinate but different side of cube
             elif start_ray.map_coordinate == ray.map_coordinate and start_ray.hit_direction != ray.hit_direction:
-                self._render_wall_segment(start_ray, prev_ray)
+                self.__render_wall_segment(start_ray, prev_ray)
                 start_ray = prev_ray
 
             # end of screen
             elif ray.column >= WIDTH:
-                self._render_wall_segment(start_ray, prev_ray)
+                self.__render_wall_segment(start_ray, prev_ray)
 
             prev_ray = ray
         self.renderer.update_screen()
 
-    def _render_wall_segment(self, start_ray, end_ray):
+    def __render_wall_segment(self, start_ray, end_ray):
         start_points = start_ray.get_line()
         end_points = end_ray.get_line()
         c = 255 - 100 * start_ray.hit_direction

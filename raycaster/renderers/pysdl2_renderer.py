@@ -19,7 +19,7 @@ class PySDL2Renderer(Renderer):
         self.clock = sdl2.SDL_GetTicks()
 
     @staticmethod
-    def interpolate(start, end):
+    def __interpolate(start, end):
         steps = np.abs(end[0] - start[0]) + 1
         x = np.linspace(start[0], end[0], steps).astype(np.int64)
         y = np.linspace(start[1], end[1], steps).astype(np.int64)
@@ -27,7 +27,7 @@ class PySDL2Renderer(Renderer):
 
     @staticmethod
     @njit(fastmath=True)
-    def _parallelogram_to_rectangles(top_left, bottom_left, top_right, bottom_right):
+    def __parallelogram_to_rectangles(top_left, bottom_left, top_right, bottom_right):
         def interpolate(start, end):
             steps = np.abs(end[0] - start[0]) + 1
             x = np.linspace(start[0], end[0], steps).astype(np.int64)
@@ -60,8 +60,8 @@ class PySDL2Renderer(Renderer):
                       color, (x, y, dx, dy))
 
     def render_parallelogram(self, top_left, bottom_left, top_right, bottom_right, color):
-        # top = self.interpolate(top_left, top_right)
-        # bottom = self.interpolate(bottom_left, bottom_right)
+        # top = self.__interpolate(top_left, top_right)
+        # bottom = self.__interpolate(bottom_left, bottom_right)
         # points = []
         # # (x1, y1, x2, y2, x3, y3, x4, y4, ...)
         # # |  first line  |  second line  | ...
@@ -72,7 +72,7 @@ class PySDL2Renderer(Renderer):
         #     points.append(bottom[i][1])
         # sdl2.ext.line(self.window.get_surface(), color, points)
 
-        rectangles = self._parallelogram_to_rectangles(
+        rectangles = self.__parallelogram_to_rectangles(
             top_left, bottom_left, top_right, bottom_right)
 
         # When rendering multiple rects this doesn't work even though it should according to the PySDL2 docs?
