@@ -8,12 +8,10 @@ def main():
     renderer = Renderers.PYGAME
 
     # raycaster = Raycasters.RAYCASTER
-    raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
-    # raycaster = Raycasters.RENDER_STEP_RECTANGLE_RAYCASTER
-    # raycaster = Raycasters.RENDER_STEP_PARALLELOGRAM_RAYCASTER
-    # raycaster = Raycasters.PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER
-    # raycaster = Raycasters.PER_WALL_RAYCASTER
-    # raycaster = Raycasters.PER_WALL_RENDER_STEP_RAYCASTER
+    # raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
+    # raycaster = Raycasters.RECTANGLE_RAYCASTER
+    # raycaster = Raycasters.PARALLELOGRAM_RAYCASTER
+    raycaster = Raycasters.PER_WALL_RAYCASTER
 
     debug = True
 

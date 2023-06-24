@@ -1,15 +1,10 @@
 from raycaster.raycasters.raycaster import Raycaster
-from raycaster.settings import WIDTH, RENDER_STEP
-from raycaster.ray import Ray
-
-import numpy as np
+from raycaster.settings import RENDER_STEP
 
 
-class RenderStepRectangleRaycaster(Raycaster):
+class RectangleRaycaster(Raycaster):
     def __init__(self, renderer, world_map, player, debug):
         super().__init__(renderer, world_map, player, debug)
-        self.rays = np.array([Ray(i)
-                              for i in range(0, WIDTH + RENDER_STEP, RENDER_STEP)])
 
     def render_walls(self):
         self.renderer.clear_screen()
