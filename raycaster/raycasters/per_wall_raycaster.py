@@ -17,12 +17,12 @@ class PerWallRaycaster(Raycaster):
             if start_ray.map_coordinate[ray.hit_direction] != ray.map_coordinate[ray.hit_direction]:
                 # always render with the previous ray because the current ray failed the condition, so it's not the same wall anymore
                 self.__render_wall_segment(start_ray, prev_ray)
-                start_ray = ray
+                start_ray = prev_ray
 
             # same coordinate but different side of cube
             if start_ray.map_coordinate == ray.map_coordinate and start_ray.hit_direction != ray.hit_direction:
                 self.__render_wall_segment(start_ray, prev_ray)
-                start_ray = ray
+                start_ray = prev_ray
 
             # end of screen
             elif ray.column >= WIDTH:

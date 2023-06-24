@@ -1,10 +1,8 @@
 from raycaster.raycasters.raycaster import Raycaster
 from raycaster.raycasters.per_wall_raycaster import PerWallRaycaster
+from raycaster.raycasters.rectangle_raycaster import RenderStepRectangleRaycaster
 from raycaster.raycasters.per_wall_segment_raycaster import PerWallSegmentRaycaster
-from raycaster.raycasters.per_wall_render_step_raycaster import PerWallRenderStepRaycaster
-from raycaster.raycasters.render_step_rectangle_raycaster import RenderStepRectangleRaycaster
-from raycaster.raycasters.render_step_parallelogram_raycaster import RenderStepParallelogramRaycaster
-from raycaster.raycasters.per_wall_segment_render_step_raycaster import PerWallSegmentRenderStepRaycaster
+from raycaster.raycasters.parallelogram_raycaster import RenderStepParallelogramRaycaster
 from raycaster.renderers.renderer import Renderer
 from raycaster.world_map import WorldMap
 from raycaster.player import Player
@@ -16,10 +14,8 @@ class Raycasters(Enum):
     RAYCASTER = Raycaster
     PER_WALL_RAYCASTER = PerWallRaycaster
     PER_WALL_SEGMENT_RAYCASTER = PerWallSegmentRaycaster
-    PER_WALL_RENDER_STEP_RAYCASTER = PerWallRenderStepRaycaster
     RENDER_STEP_RECTANGLE_RAYCASTER = RenderStepRectangleRaycaster
     RENDER_STEP_PARALLELOGRAM_RAYCASTER = RenderStepParallelogramRaycaster
-    PER_WALL_SEGMENT_RENDER_STEP_RAYCASTER = PerWallSegmentRenderStepRaycaster
 
 
 class RaycasterFactory:

@@ -1,4 +1,4 @@
-from raycaster.settings import WIDTH
+from raycaster.settings import WIDTH, RENDER_STEP
 from raycaster.ray import Ray
 
 import numpy as np
@@ -12,7 +12,8 @@ class Raycaster:
         self.player = player
         self.debug = debug
         self.debug_color = (255, 0, 0)
-        self.rays = np.array([Ray(i) for i in range(WIDTH + 1)])
+        self.rays = np.array([Ray(i) for i in range(
+            0, WIDTH + RENDER_STEP, RENDER_STEP)])
 
     def render_walls(self):
         self.renderer.clear_screen()
