@@ -9,6 +9,10 @@ from raycaster.player import Player
 
 class Game:
     def __init__(self, renderer: Renderer = Renderers.PYGAME, raycaster: Raycaster = Raycasters.RAYCASTER, debug: bool = False):
+        if debug and renderer == Renderers.PYSDL2:
+            raise ValueError(
+                "Debug mode is not supported with PySDL2 renderer yet, use PyGame renderer instead for debug mode.")
+
         self.renderer_factory = RendererFactory(renderer)
         self.renderer = self.renderer_factory.create_renderer()
 
