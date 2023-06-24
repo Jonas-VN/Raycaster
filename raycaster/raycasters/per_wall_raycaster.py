@@ -33,8 +33,6 @@ class PerWallRaycaster(Raycaster):
         self.renderer.update_screen()
 
     def __render_wall_segment(self, start_ray, end_ray):
-        # print(
-        #     f"Start: {start_ray.map_coordinate}, End: {end_ray.map_coordinate}")
         start_points = start_ray.get_line()
         end_points = end_ray.get_line()
         c = 255 - 100 * start_ray.hit_direction
