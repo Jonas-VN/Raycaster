@@ -11,12 +11,12 @@ class Renderers(Enum):
 
 
 class RendererFactory:
-    def __init__(self, renderer: Renderer):
-        self.renderer = renderer
+    def __init__(self):
+        pass
 
-    def create_renderer(self) -> Renderer:
-        if self.renderer not in Renderers:
+    def create_renderer(self, renderer) -> Renderer:
+        if renderer not in Renderers:
             raise ValueError(
-                f"Renderer {self.renderer} is not supported.")
-        renderer_class = Renderers(self.renderer).value
+                f"Renderer {renderer} is not supported.")
+        renderer_class = Renderers(renderer).value
         return renderer_class()

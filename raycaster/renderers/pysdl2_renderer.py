@@ -117,8 +117,15 @@ class PySDL2Renderer(Renderer):
         keyboard.A = keys[sdl2.SDL_SCANCODE_Q] or keys[sdl2.SDL_SCANCODE_A] == 1
         keyboard.S = keys[sdl2.SDL_SCANCODE_S] == 1
         keyboard.D = keys[sdl2.SDL_SCANCODE_D] == 1
+        keyboard.P = keys[sdl2.SDL_SCANCODE_P] == 1
         keyboard.ESCAPE = keys[sdl2.SDL_SCANCODE_ESCAPE] == 1
         keyboard.UP = keys[sdl2.SDL_SCANCODE_UP] == 1
         keyboard.DOWN = keys[sdl2.SDL_SCANCODE_DOWN] == 1
 
+        if self.fps != -1:
+            sdl2.SDL_Delay(int(1000 / self.fps))
+
         return keyboard, delta_time
+
+    def set_mouse_visibility(self, visible):
+        sdl2.SDL_SetRelativeMouseMode(visible)

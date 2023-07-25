@@ -1,35 +1,32 @@
-from raycaster.raycasters.raycaster_factory import RaycasterFactory, Raycasters
-from raycaster.raycasters.raycaster import Raycaster
+from raycaster.raycasters.raycaster_factory import Raycasters
 from raycaster.renderers.renderer_factory import RendererFactory, Renderers
-from raycaster.renderers.renderer import Renderer
-from raycaster.world_map import WorldMap
-from raycaster.keyboard import Keyboard
-from raycaster.player import Player
+from raycaster.states.state_controller import StateController
+from raycaster.raycasters.raycaster_factory import Raycasters
+from raycaster.renderers.renderer_factory import Renderers
 
 
 class Game:
-    def __init__(self, renderer: Renderer = Renderers.PYGAME, raycaster: Raycaster = Raycasters.RAYCASTER, debug: bool = False):
+    def __init__(self, renderer: Renderers = Renderers.PYSDL2, raycaster: Raycasters = Raycasters.RAYCASTER, debug: bool = False):
         if debug and renderer == Renderers.PYSDL2:
             raise ValueError(
                 "Debug mode is not supported with PySDL2 renderer yet, use PyGame renderer instead for debug mode.")
 
-        self.renderer_factory = RendererFactory(renderer)
-        self.renderer = self.renderer_factory.create_renderer()
+        self.renderer_factory = RendererFactory()
+        self.renderer = self.renderer_factory.create_renderer(renderer)
 
-        self.world_map = WorldMap()
-        self.player = Player(self.world_map)
+        self.state_controller = StateController(self.renderer)
+        self.state_controller.init_raycaster_state(raycaster, debug)
+        self.state_controller.init_paused_state()
 
-        self.raycaster_factory = RaycasterFactory(raycaster)
-        self.raycaster = self.raycaster_factory.create_raycaster(
-            self.renderer, self.world_map, self.player, debug)
+        self.current_state = self.state_controller.get_state()
 
     def __main_loop(self):
-        keyboard = Keyboard()
-        while self.renderer.running and not keyboard.ESCAPE:
-            keyboard, delta_time = self.renderer.handle_keys()
-            self.player.move(keyboard, delta_time)
-            self.raycaster.calculate_rays()
-            self.raycaster.render_walls()
+        while self.renderer.running:
+            next_state = self.current_state.handle_frame()
+            if next_state is not None:
+                self.current_state = self.state_controller.change_state(
+                    next_state)
+                self.current_state.init_state()
         self.renderer.destroy()
 
     def run(self):

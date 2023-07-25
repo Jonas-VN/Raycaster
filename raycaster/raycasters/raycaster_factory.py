@@ -6,7 +6,6 @@ from raycaster.raycasters.parallelogram_raycaster import ParallelogramRaycaster
 from raycaster.renderers.renderer import Renderer
 from raycaster.world_map import WorldMap
 from raycaster.player import Player
-
 from enum import Enum
 
 
@@ -19,12 +18,14 @@ class Raycasters(Enum):
 
 
 class RaycasterFactory:
-    def __init__(self, raycaster_type: Raycaster = Raycasters.RAYCASTER):
-        self.raycaster_type = raycaster_type
+    def __init__(self, renderer: Renderer):
+        self.renderer = renderer
+        self.world_map = WorldMap()
+        self.player = Player(self.world_map)
 
-    def create_raycaster(self, renderer: Renderer, world_map: WorldMap, player: Player, debug: bool) -> Raycaster:
-        if self.raycaster_type not in Raycasters:
+    def create_raycaster(self, raycaster_type, debug) -> Raycaster:
+        if raycaster_type not in Raycasters:
             raise ValueError(
-                f"Raycaster type {self.raycaster_type} is not supported.")
-        raycaster_class = Raycasters(self.raycaster_type).value
-        return raycaster_class(renderer, world_map, player, debug)
+                f"Raycaster type {raycaster_type} is not supported.")
+        raycaster_class = Raycasters(raycaster_type).value
+        return raycaster_class(self.renderer, self.world_map, self.player, debug)

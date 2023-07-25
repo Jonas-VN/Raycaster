@@ -36,8 +36,9 @@ class PyGameRenderer(Renderer):
         keyboard = Keyboard()
 
         # Lock mouse in the middle of the screen
-        pygame.mouse.set_pos(self.width // 2, self.height // 2)
-        pygame.event.set_grab(True)
+        if not pygame.mouse.get_visible():
+            pygame.mouse.set_pos(self.width // 2, self.height // 2)
+            pygame.event.set_grab(True)
 
         self.clock.tick()
         delta_time = self.clock.get_rawtime() / 1000
@@ -58,8 +59,15 @@ class PyGameRenderer(Renderer):
         keyboard.A = keys[pygame.K_q] or keys[pygame.K_a]
         keyboard.S = keys[pygame.K_s]
         keyboard.D = keys[pygame.K_d]
+        keyboard.P = keys[pygame.K_p]
         keyboard.ESCAPE = keys[pygame.K_ESCAPE]
         keyboard.UP = keys[pygame.K_UP]
         keyboard.DOWN = keys[pygame.K_DOWN]
 
+        if self.fps != -1:
+            self.clock.tick(self.fps)
+
         return keyboard, delta_time
+
+    def set_mouse_visibility(self, visible):
+        pygame.mouse.set_visible(visible)

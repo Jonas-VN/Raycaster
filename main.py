@@ -4,18 +4,10 @@ from raycaster.raycasters.raycaster_factory import Raycasters
 
 
 def main():
-    renderer = Renderers.PYSDL2
-    # renderer = Renderers.PYGAME
-
-    # raycaster = Raycasters.RAYCASTER
-    # raycaster = Raycasters.PER_WALL_SEGMENT_RAYCASTER
-    # raycaster = Raycasters.RECTANGLE_RAYCASTER
-    # raycaster = Raycasters.PARALLELOGRAM_RAYCASTER
-    raycaster = Raycasters.PER_WALL_RAYCASTER
-
-    debug = True
-
-    game = Game(renderer=renderer, raycaster=raycaster, debug=debug)
+    renderer = Renderers.PYGAME
+    raycaster = Raycasters.RAYCASTER
+    debug = False
+    game = Game(renderer, raycaster, debug)
     game.run()
 
 

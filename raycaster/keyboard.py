@@ -7,6 +7,7 @@ class Keyboard:
     D: bool = False
     W: bool = False
     S: bool = False
+    P: bool = False
     UP: bool = False
     DOWN: bool = False
     ESCAPE: bool = False
